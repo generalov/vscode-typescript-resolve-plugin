@@ -1,0 +1,72 @@
+{
+    "name": "vscode-typescript-resolve-plugin",
+    "displayName": "vscode-typescript-resolve-plugin",
+    "description": "The VS Code extension provides the modules resolution support using the typescript-resolve-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "publisher": "generalov",
+    "repository": {
+        "url": "https://github.com/generalov/vscode-typescript-resolve-plugin.git"
+    },
+    "engines": {
+        "vscode": "^1.35.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:javascript",
+        "onLanguage:javascriptreact",
+        "onLanguage:typescript",
+        "onLanguage:typescriptreact",
+        "onCommand:tsresolve.followModule"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "TSResolve",
+            "properties": {
+                "tsresolve.resolver": {
+                    "type": "string",
+                    "description": "The path to the module resolver."
+                },
+                "tsresolve.cwd": {
+                    "type": "string",
+                    "description": "The path to the workspace directory."
+                },
+                "tsresolve.options": {
+                    "type": "object"
+                }
+            }
+        },
+        "commands": [{
+            "command": "tsresolve.followModule",
+            "title": "Follow module"
+        }],
+        "keybindings": [{
+            "command": "tsresolve.followModule",
+            "key": "f12"
+        }],
+        "typescriptServerPlugins": [
+            {
+                "name": "typescript-resolve-plugin",
+                "enableForWorkspaceTypeScriptVersions": true
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "@types/node": "^7.0.43",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "typescript-resolve-plugin": "^1.0.0"
+    }
+}
