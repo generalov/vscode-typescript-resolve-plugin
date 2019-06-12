@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/node@^12.0.7":
+  version "12.0.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.8.tgz#551466be11b2adc3f3d47156758f610bd9f6b1d8"
+
 "@types/node@^7.0.43":
   version "7.10.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.10.6.tgz#c42137f0f2f6458bf0c898d65f48c5f600911475"
@@ -466,9 +470,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-typescript-resolve-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/typescript-resolve-plugin/-/typescript-resolve-plugin-1.0.0.tgz#cc6197186e67779966d9069806652738b6a24c79"
+typescript-resolve-plugin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typescript-resolve-plugin/-/typescript-resolve-plugin-1.0.1.tgz#279f482dd851bbc3bee6c71b1ed407a84ab8ef66"
+  dependencies:
+    "@types/node" "^12.0.7"
 
 typescript@^2.6.1:
   version "2.9.2"

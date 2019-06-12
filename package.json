@@ -2,7 +2,7 @@
     "name": "vscode-typescript-resolve-plugin",
     "displayName": "vscode-typescript-resolve-plugin",
     "description": "The VS Code extension provides the modules resolution support using the typescript-resolve-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "publisher": "generalov",
     "repository": {
@@ -40,14 +40,18 @@
                 }
             }
         },
-        "commands": [{
-            "command": "tsresolve.followModule",
-            "title": "Follow module"
-        }],
-        "keybindings": [{
-            "command": "tsresolve.followModule",
-            "key": "f12"
-        }],
+        "commands": [
+            {
+                "command": "tsresolve.followModule",
+                "title": "Follow module"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "tsresolve.followModule",
+                "key": "f12"
+            }
+        ],
         "typescriptServerPlugins": [
             {
                 "name": "typescript-resolve-plugin",
@@ -67,6 +71,6 @@
         "vscode": "^1.1.6"
     },
     "dependencies": {
-        "typescript-resolve-plugin": "^1.0.0"
+        "typescript-resolve-plugin": "^1.0.1"
     }
 }
