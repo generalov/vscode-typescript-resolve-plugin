@@ -1,11 +1,20 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
+import { ResolverManager } from 'typescript-resolve-plugin/lib/resolver'
+
+class Logger {
+  setLogger() {}
+  info(msg: any) {
+    console.log(msg)
+  }
+}
 
 const pluginId = 'typescript-resolve-plugin'
 const configurationSection = 'tsresolve'
 const commandNames = {
   followModule: 'tsresolve.followModule'
 }
+const logger = new Logger()
 
 interface SynchronizedConfiguration {
   resolver?: string
@@ -23,10 +32,6 @@ function extract(lineText: string): string | null {
 }
 
 function followModule() {
-  const config = getConfiguration()
-  if (!config.resolver) {
-    return
-  }
   const editor = vscode.window.activeTextEditor
   if (!editor) {
     return
@@ -38,12 +43,18 @@ function followModule() {
   if (!sourcePath) {
     return
   }
+  const config = getConfiguration()
+  if (!config.resolver) {
+    return
+  }
+
   const lineText = document.lineAt(editor.selection.active).text
   const moduleName = extract(lineText)
 
   if (moduleName) {
-    const createResolver = require(absPath(config.resolver, sourcePath))
-    const resolved = createResolver(config).resolve(moduleName, containingFile)
+    const resolver = new ResolverManager(logger)
+    resolver.configure(config)
+    const resolved = resolver.resolve(moduleName, containingFile)
     const target = vscode.Uri.file(absPath(resolved, sourcePath))
     return vscode.commands.executeCommand('vscode.open', target)
   }
@@ -106,8 +117,11 @@ async function getLanguageServerAPI() {
 }
 
 function synchronizeConfiguration(api: any) {
-  const configuration = getConfiguration()
-  api.configurePlugin(pluginId, configuration)
+  const config = getConfiguration()
+  if (!config.resolver) {
+    return
+  }
+  api.configurePlugin(pluginId, config)
 }
 
 export async function activate(context: vscode.ExtensionContext) {
